@@ -141,7 +141,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = Client::new(rpc_url, rpc_auth)?;
 
     // MySQL 数据库连接设置
-    let url = "mysql://root:MySQL000000.@mysql:3306/block_chain";
+    let url = "mysql://root:123456@mysql:3306/block_chain";
     let pool = Pool::new(url)?;  // 修复后的错误类型
 
     // 启用 Warp 服务器并增加 CORS 支持
