@@ -93,6 +93,7 @@ export default defineComponent({
 
     const fetchBlockData = async () => {
       const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:3030' : 'http://backend:3030';
+
       try {
         const response = await fetch(`${backendUrl}/block_data`);
         const data: BlockData[] = await response.json();

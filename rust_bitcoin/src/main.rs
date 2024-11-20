@@ -134,7 +134,7 @@ struct BlockDataSend {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rpc_url = "http://host.docker.internal:8332"; // Bitcoin Core 节点的 URL
+    let rpc_url = "http://bitcoin-core:8332";// Bitcoin Core 节点的 URL
     let rpc_auth = Auth::UserPass("user1".to_string(), "123456".to_string());  // 更新为你的 Bitcoin Core 认证信息
 
     // 创建 Bitcoin Core 客户端

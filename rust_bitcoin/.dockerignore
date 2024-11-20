@@ -1,0 +1,17 @@
+target
+**/target
+
+# 忽略版本控制文件
+.git
+.gitignore
+
+# 忽略本地开发环境文件
+.env
+*.log
+
+# 忽略 IDE 或编辑器生成的文件
+*.swp
+*.swo
+*.bak
+*.tmp
+*.DS_Store

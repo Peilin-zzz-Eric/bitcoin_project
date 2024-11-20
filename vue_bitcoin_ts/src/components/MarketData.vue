@@ -96,6 +96,7 @@ export default defineComponent({
 
     async fetchData() {
       const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:3030' : 'http://backend:3030';
+
       try {
         const response = await fetch(`${backendUrl}/market_data`);
         const result: MarketData = await response.json(); // 使用 MarketData 类型推断

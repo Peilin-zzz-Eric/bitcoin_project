@@ -1,29 +1,30 @@
 <template>
-  <div ref="PriceDayChart" class="PriceDayChart"></div>
+  <div ref="PriceYearChart" class="PriceYearChart"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 import * as echarts from 'echarts';
 
-// 定义接口，明确数据结构
+// 定义接口描述数据结构
 interface PriceData {
   price: number;
   timestamp: string;
 }
 
 export default defineComponent({
-  name: 'PriceDayChart',
+  name: 'PriceYearChart',
   setup() {
-    // 定义chartData的类型为 PriceData 数组
+    // chartData 类型为 PriceData 数组
     const chartData = ref<PriceData[]>([]);
     const chart = ref<echarts.ECharts | null>(null);
-    const PriceDayChart = ref<HTMLDivElement | null>(null);
+    const PriceYearChart = ref<HTMLDivElement | null>(null);
     const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:3030' : 'http://backend:3030';
-    // 数据获取与图表渲染函数
+
+    // 获取数据并渲染图表
     const fetchDataAndRenderChart = async () => {
       try {
-        const response = await fetch(`${backendUrl}/price_day`);
+        const response = await fetch(`${backendUrl}/price_year`);
         const data: PriceData[] = await response.json();
         chartData.value = data;
         renderChart();
@@ -33,8 +34,8 @@ export default defineComponent({
     };
 
     const renderChart = () => {
-      if (PriceDayChart.value && !chart.value) {
-        chart.value = echarts.init(PriceDayChart.value);
+      if (PriceYearChart.value && !chart.value) {
+        chart.value = echarts.init(PriceYearChart.value);
       }
       if (!chart.value) return;
 
@@ -44,7 +45,7 @@ export default defineComponent({
 
       const option = {
         title: {
-          text: 'Bitcoin Price (Last 24 Hours)',
+          text: 'Bitcoin Price (Last Year)',
         },
         tooltip: {
           trigger: 'item',
@@ -52,19 +53,22 @@ export default defineComponent({
         xAxis: {
           type: 'category',
           data: chartData.value.map(item => item.timestamp),
+          /*axisLabel: {
+            rotate: 45,  // 旋转 45 度
+          },*/
         },
         yAxis: {
           type: 'value',
           min: adjustedMinPrice,
           axisLabel: {
-            formatter: '${value}', // Add the dollar symbol to the y-axis labels
+            formatter: '${value}', // 添加美元符号
           },
         },
         series: [
           {
             data: chartData.value.map(item => item.price),
             type: 'line',
-            smooth: false,
+            smooth: false,  // 设置 smooth 为 false 或移除此行来确保线是直线
             lineStyle: {
               width: 2,
             },
@@ -78,7 +82,7 @@ export default defineComponent({
       chart.value.setOption(option);
     };
 
-    // 生命周期钩子
+    // 组件挂载后获取数据并渲染图表
     onMounted(() => {
       fetchDataAndRenderChart();
       // 每 10 秒刷新一次数据
@@ -88,7 +92,7 @@ export default defineComponent({
     });
 
     return {
-      PriceDayChart,
+      PriceYearChart,
       chartData,
     };
   },
@@ -96,7 +100,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.PriceDayChart {
+.PriceYearChart {
   width: 80%;
   height: 500px;
 }
