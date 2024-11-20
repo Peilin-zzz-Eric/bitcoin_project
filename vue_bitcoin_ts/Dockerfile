@@ -24,6 +24,8 @@ FROM nginx:alpine AS production-stage
 
 # 8. 复制构建生成的静态文件到 Nginx 默认目录
 COPY --from=build-stage /app/dist /usr/share/nginx/html
+# 将 nginx.conf 拷贝到 Nginx 配置目录
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 9. 暴露端口
 EXPOSE 80

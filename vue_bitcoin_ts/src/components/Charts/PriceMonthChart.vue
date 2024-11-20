@@ -19,8 +19,7 @@ export default defineComponent({
     const chartData = ref<PriceData[]>([]);
     const chart = ref<echarts.ECharts | null>(null);
     const PriceMonthChart = ref<HTMLDivElement | null>(null);
-    const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:3030' : 'http://backend:3030';
-
+    const backendUrl = '/api';
     // 获取数据并渲染图表
     const fetchDataAndRenderChart = async () => {
       try {

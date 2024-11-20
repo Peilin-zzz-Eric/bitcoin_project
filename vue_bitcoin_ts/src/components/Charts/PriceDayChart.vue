@@ -19,7 +19,7 @@ export default defineComponent({
     const chartData = ref<PriceData[]>([]);
     const chart = ref<echarts.ECharts | null>(null);
     const PriceDayChart = ref<HTMLDivElement | null>(null);
-    const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:3030' : 'http://backend:3030';
+    const backendUrl = '/api';
 
     // 数据获取与图表渲染函数
     const fetchDataAndRenderChart = async () => {

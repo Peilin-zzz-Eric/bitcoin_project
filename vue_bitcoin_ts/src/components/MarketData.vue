@@ -95,7 +95,8 @@ export default defineComponent({
     // 获取市场数据
 
     async fetchData() {
-      const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:3030' : 'http://backend:3030';
+      const backendUrl = '/api';
+
 
       try {
         const response = await fetch(`${backendUrl}/market_data`);

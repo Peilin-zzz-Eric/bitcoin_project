@@ -92,7 +92,7 @@ export default defineComponent({
     };
 
     const fetchBlockData = async () => {
-      const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:3030' : 'http://backend:3030';
+      const backendUrl = '/api';
 
       try {
         const response = await fetch(`${backendUrl}/block_data`);
