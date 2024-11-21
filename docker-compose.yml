@@ -4,7 +4,7 @@ services:
     expose:
       - "8332" 
     volumes:
-      - ./bitcoin.conf:/home/bitcoin/.bitcoin/bitcoin.conf 
+      - ./bitcoin_core_init/bitcoin.conf:/home/bitcoin/.bitcoin/bitcoin.conf 
       - bitcoin-data:/home/bitcoin/.bitcoin 
     networks:
       - app-network
@@ -50,7 +50,7 @@ services:
       - app-network
     volumes:
       - mysql-data:/var/lib/mysql  # 数据持久化存储
-      - ./mysql-init:/docker-entrypoint-initdb.d:ro
+      - ./mysql_init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 --silent"]
       interval: 10s
