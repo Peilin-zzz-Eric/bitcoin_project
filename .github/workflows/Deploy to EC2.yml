@@ -30,7 +30,7 @@ jobs:
         key: ec2_key.pem               # Use the temporary key file
         port: 22
         script: |
-          echo "Connecting to EC2 instance ${EC2_HOST}..."
+          # echo "Connecting to EC2 instance ${EC2_HOST}..."
           # Install necessary packages
           sudo apt update
           sudo apt install snapd -y
