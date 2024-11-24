@@ -23,7 +23,7 @@ jobs:
         ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} echo "SSH connected successfully"
 
     - name: Deploy to EC2
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v0.1.3
       with:
         host: ${{ secrets.EC2_HOST }}      # Fetch the host address from Secrets
         username: ${{ secrets.EC2_USER }} # Fetch the username from Secrets
