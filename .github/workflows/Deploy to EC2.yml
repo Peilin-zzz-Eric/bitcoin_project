@@ -35,7 +35,9 @@ jobs:
         port: 22
         script: |
           echo "Connecting to EC2 instance ${EC2_HOST}..."
-          options: "-o StrictHostKeyChecking=no"
+          ssh-add -l  # 检查加载的密钥
+          ls -la ~/.ssh  # 确认 .ssh 目录的内容和权限
+          cat ~/.ssh/authorized_keys  # 确认公钥文件是否正确
           # Install necessary packages
           sudo apt update
           sudo apt install snapd -y
