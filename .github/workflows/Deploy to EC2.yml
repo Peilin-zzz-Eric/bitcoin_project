@@ -23,14 +23,14 @@ jobs:
         ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} echo "SSH connected successfully"
 
     - name: Deploy to EC2
-      uses: appleboy/ssh-action@v0.1.3
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}      # Fetch the host address from Secrets
         username: ${{ secrets.EC2_USER }} # Fetch the username from Secrets
         key: ec2_key.pem               # Use the temporary key file
         port: 22
         script: |
-          # echo "Connecting to EC2 instance ${EC2_HOST}..."
+          echo "Connecting to EC2 instance ${EC2_HOST}..."
           # Install necessary packages
           sudo apt update
           sudo apt install snapd -y
