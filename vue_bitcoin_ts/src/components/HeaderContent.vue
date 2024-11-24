@@ -5,7 +5,7 @@
 <template>
   <header class="header">
     <div class="header-container">
-      <h1>Bitcoin Metric</h1>
+      <h1>Bitcoin Metri</h1>
     </div>
   </header>
 </template>
