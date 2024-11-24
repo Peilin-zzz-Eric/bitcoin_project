@@ -1,0 +1,49 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  deploy-to-ec2:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Create Temporary Key File
+      run: |
+        echo "${{ secrets.EC2_KEY }}" > ec2_key.pem
+        chmod 600 ec2_key.pem
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v0.1.14
+      with:
+        host: ${{ secrets.EC2_HOST }}      # Fetch the host address from Secrets
+        username: ${{ secrets.EC2_USER }} # Fetch the username from Secrets
+        key: ec2_key.pem                  # Use the temporary key file
+        port: 22
+        script: |
+          echo "Connecting to EC2 instance ${EC2_HOST}..."
+          # Install necessary packages
+          sudo apt update
+          sudo apt install snapd -y
+          sudo apt install git -y
+          sudo snap install docker
+          sudo snap start docker
+          sudo groupadd docker
+          sudo usermod -aG docker $USER
+          newgrp docker
+          sudo chown root:docker /var/run/docker.sock
+          
+          git clone https://github.com/Peilin-zzz-Eric/bitcoin_project.git || (cd bitcoin_project && git pull)
+          cd bitcoin_project
+          docker-compose build --no-cache
+          docker-compose up -d
+
+
+    - name: Delete Temporary Key File
+      run: rm -f ec2_key.pem
+          
