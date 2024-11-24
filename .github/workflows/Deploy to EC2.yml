@@ -30,7 +30,7 @@ jobs:
       with:
         host: ${{ secrets.EC2_HOST }}      # Fetch the host address from Secrets
         username: ${{ secrets.EC2_USER }} # Fetch the username from Secrets
-        key: ec2_key.pem                  # Use the temporary key file
+        key: ${{ secrets.EC2_KEY }}                 # Use the temporary key file
         port: 22
         script: |
           echo "Connecting to EC2 instance ${EC2_HOST}..."
