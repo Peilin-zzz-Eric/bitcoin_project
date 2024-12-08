@@ -35,7 +35,6 @@ jobs:
           
           git clone https://github.com/Peilin-zzz-Eric/bitcoin_project.git || (cd bitcoin_project && git pull)
           cd bitcoin_project
-          docker-compose build --no-cache
           docker-compose up -d
 
 
